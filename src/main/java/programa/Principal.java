@@ -3,7 +3,7 @@ package programa;
 import java.util.Scanner;
 
 public class Principal {
-    public boolean menu(boolean continua){
+    public boolean menu(){
         System.out.println("Escolha uma das opcoes abaixo: \n");
         System.out.println("1 - Metodo da Bisseccao.");
         System.out.println("2 - Metodo da Posicao Falsa.");
@@ -29,25 +29,31 @@ public class Principal {
             case "3":
                 raizes = d.raizes("N");
                 break;
+
+            case "4":
+                raizes = d.raizes("S");
+                break;
+
+            case "5":
+                return false;
+
+            default:
+                System.out.println("\nOpcao invalida!\n");
+                return true;
         }
 
-        if(raizes.length == 0){
-            System.out.println("\nNao existem raizes neste intervalo.");
-        } else{
-            System.out.println("\nAs raizes da funcao sao:");
-            System.out.print("                                                   ");
-            System.out.println(raizes[0] + " e " + raizes[1]);
-        }
+        System.out.println("\nAs raizes da funcao sao:");
+        System.out.print("                                                   ");
+        System.out.println(raizes[0] + " e " + raizes[1]);
 
-        return continua;
+        return true;
     }
 
     public static void main(String[] args) {
         Principal p = new Principal();
-        boolean continua = true;
 
-        while(continua){
-            p.menu(continua);
-        }
+        while(p.menu()){}
+
+        System.exit(0);
     }
 }

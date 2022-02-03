@@ -28,6 +28,10 @@ public class PosicaoFalsa {
 
                 // Se |f(x)| for menor que 10^-10, entao a raiz sera igual ao 'x' atual
                 if(Math.abs(fx) < d.getPRECIS()){
+                    if(k < 30){
+                        grafico.desenhaGrafico(k, x, "Metodo da Posicao Falsa");
+                    }
+
                     break;
                 }
 

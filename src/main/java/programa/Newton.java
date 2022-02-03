@@ -17,7 +17,7 @@ public class Newton {
         Grafico grafico = new Grafico();
         grafico.desenhaGrafico(1, x1, "Metodo de Newton");
 
-        // Se |f(x0)| for maior ou igual a 10^-10, encerra o programa
+        // Se |f(x0)| for maior ou igual a 10^-10, encerra a operacao
         if(Math.abs(d.funcao(x0)) >= d.getPRECIS()){
 
             // Continua ate |f(x1)| ser menor que 10^-10
@@ -26,8 +26,12 @@ public class Newton {
 
                 fx1 = d.funcao(x1);
 
-                // Caso |x1 - x0| for menor que 10^-10, encerra o programa
+                // Caso |x1 - x0| for menor que 10^-10, encerra a operacao
                 if(Math.abs(x1 - x0) < d.getPRECIS()){
+                    if(k < 30){
+                        grafico.desenhaGrafico(k, x1, "Metodo de Newton");
+                    }
+
                     break;
                 }
 

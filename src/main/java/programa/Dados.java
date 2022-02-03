@@ -111,6 +111,12 @@ public class Dados {
 
                         raizes[i] = n.encontraRaiz(inic, fim);
                         break;
+
+                    case "S":
+                        Secante s = new Secante();
+
+                        raizes[i] = s.encontraRaiz(inic, fim);
+                        break;
                 }
 
                 i++;
