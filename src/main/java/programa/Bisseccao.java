@@ -12,7 +12,6 @@ public class Bisseccao {
     public double encontraRaiz(double inic, double fim){
         double a = inic;
         double b = fim;
-        double fa = d.funcao(a);
         double x = (a + b)/2;
         Grafico grafico = new Grafico();
 
@@ -20,10 +19,8 @@ public class Bisseccao {
         for(int k = 1; b - a >= d.getPRECIS(); k++){
             x = (a + b)/2;
 
-            double fx = d.funcao(x);
-
             // Se f(x)*f(a) for maior que 0, entao 'a' ira assumir o valor de 'x', caso contrario, sera 'b'
-            if(fx * fa > 0){
+            if(d.funcao(x) * d.funcao(a) > 0){
                 a = x;
             } else{
                 b = x;

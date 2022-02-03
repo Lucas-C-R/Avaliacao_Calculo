@@ -14,29 +14,33 @@ public class Secante {
         double x1 = fim;
         Grafico grafico = new Grafico();
 
-        // Se |f(x0)| for menor que 10^-10, entao a raiz sera igual ao x0
+        // Se |f(x0)| for menor que 10^-10, entao a raiz sera igual a 'x0'
         if(Math.abs(d.funcao(x0)) < d.getPRECIS()){
+            grafico.desenhaGrafico(1, x0, "Metodo da Secante");
+
             return x0;
         } else{
 
-            // Se |x1 - x0| for menor que 10^-10, encerra a operacao
-            for(int k = 1; Math.abs(x1 - x0) >= d.getPRECIS(); k++){
-                double x2 = x1 - ((d.funcao(x1)/(d.funcao(x1) - d.funcao(x0))) * (x1 - x0));
+            // Se |f(x1)| ou |x1 - x0| for menor que 10^-10, a raiz sera igual a 'x1'
+            for(int k = 1; Math.abs(d.funcao(x1)) >= d.getPRECIS() && Math.abs(x1 - x0) >= d.getPRECIS(); k++){
 
-                x0 = x1;
-                x1 = x2;
+                // x2 = x1 - (f(x1)/(f(x1) - f(x0)) * (x1 - x0))
+                double x2 = x1 - (((d.funcao(x1))/(d.funcao(x1) - d.funcao(x0))) * (x1 - x0));
 
-                // Se f(x1) for menor que 10^-10, encerra a operacao
-                if(d.funcao(x1) < d.getPRECIS()){
+                // Se |f(x2)| ou |x2 - x1| for menor que 10^-10, a raiz sera igual a 'x2'
+                if(Math.abs(d.funcao(x2)) < d.getPRECIS() || Math.abs(x2 - x1) < d.getPRECIS()){
                     if(k < 30){
-                        grafico.desenhaGrafico(k, x1, "Metodo da Secante");
+                        grafico.desenhaGrafico(1, x2, "Metodo da Secante");
+
+                        return x2;
                     }
+                } else{
+                    x0 = x1;
+                    x1 = x2;
 
-                    break;
-                }
-
-                if(k < 30){
-                    grafico.desenhaGrafico(k, x1, "Metodo da Secante");
+                    if(k < 30){
+                        grafico.desenhaGrafico(1, x1, "Metodo da Secante");
+                    }
                 }
             }
 
