@@ -41,6 +41,15 @@ public class Dados {
     }
 
     /**
+     * Calculo da derivada da funcao fornecida.
+     * @param x O valor de x.
+     * @return O f'(x).
+     */
+    public double funcaoDerivada(double x){
+        return 5 * Math.pow(x, 4) - (10 * Math.pow(x, 2)/3) + (5 / 21);
+    }
+
+    /**
      * Separa o intervalo fornecido em intervalos menores, contendo cada um, uma raiz.
      */
     public void encontraLim(){
@@ -63,5 +72,51 @@ public class Dados {
             posAnt = posAtual;
             fAnt = fAtual;
         }
+    }
+
+    /**
+     * Encontra as raizes da funcao.
+     * @return Um vetor contendo todas as raizes, no intervalo fornecido.
+     */
+    public double[] raizes(String metodo){
+        this.encontraLim();
+        double[] raizes = new double[2];
+
+        // Verificacao pra impedir que o programa continue, sem ter encontrado os limites menores
+        if(! this.getLim().isEmpty()){
+            int i = 0;
+
+            // Iterador para a lista contendo os limites
+            for(String limites: this.getLim()){
+                int j = limites.indexOf(",");
+
+                double inic = Double.parseDouble(limites.substring(0, j));
+                double fim = Double.parseDouble(limites.substring(j+1));
+
+                switch(metodo){
+                    case "B":
+                        Bisseccao b = new Bisseccao();
+
+                        raizes[i] = b.encontraRaiz(inic, fim);
+                        break;
+
+                    case "PF":
+                        PosicaoFalsa p = new PosicaoFalsa();
+
+                        raizes[i] = p.encontraRaiz(inic, fim);
+                        break;
+
+                    case "N":
+                        Newton n = new Newton();
+
+                        raizes[i] = n.encontraRaiz(inic, fim);
+                        break;
+                }
+
+                i++;
+            }
+        }
+
+        return raizes;
     }
 }

@@ -9,7 +9,7 @@ public class PosicaoFalsa {
      * @param fim Fim do intervalo.
      * @return A raiz da funcao.
      */
-    private double encontraRaiz(double inic, double fim){
+    public double encontraRaiz(double inic, double fim){
         double a = inic;
         double b = fim;
         double fa = d.funcao(a);
@@ -17,16 +17,21 @@ public class PosicaoFalsa {
         double x = 0;
         Grafico grafico = new Grafico();
 
-        if(Math.abs(fa) > d.getPRECIS() && Math.abs(fb) > d.getPRECIS()){
+        // Se |f(a)| ou |f(b)| for menor que 10^-10, entao x sera igual a 'a'
+        if(Math.abs(fa) >= d.getPRECIS() && Math.abs(fb) >= d.getPRECIS()){
+
+            // Enquanto b-a for maior que 10^-10, essa parte continuara sendo executada
             for(int k = 1; b - a >= d.getPRECIS(); k++){
                 x = ((a * fb) - (b * fa))/(fb - fa);
 
                 double fx = d.funcao(x);
 
+                // Se |f(x)| for menor que 10^-10, entao a raiz sera igual ao 'x' atual
                 if(Math.abs(fx) < d.getPRECIS()){
                     break;
                 }
 
+                // Se f(x)*f(a) for maior que 0, entao 'a' ira assumir o valor de 'x', caso contrario, sera 'b'
                 if(fa * fx > 0){
                     a = x;
                 } else {
@@ -42,33 +47,5 @@ public class PosicaoFalsa {
         }
 
         return x;
-    }
-
-    /**
-     * Encontra as raizes da funcao.
-     * @return Um vetor contendo todas as raizes, no intervalo fornecido.
-     */
-    public double[] raizes(){
-        d.encontraLim();
-        double[] raizes = new double[2];
-
-        // Verificacao pra impedir que o programa continue, sem ter encontrado os limites menores
-        if(! d.getLim().isEmpty()){
-            int i = 0;
-
-            // Iterador para a lista contendo os limites
-            for(String limites: d.getLim()){
-                int j = limites.indexOf(",");
-
-                double inic = Double.parseDouble(limites.substring(0, j));
-                double fim = Double.parseDouble(limites.substring(j+1));
-
-                raizes[i] = (this.encontraRaiz(inic, fim));
-
-                i++;
-            }
-        }
-
-        return raizes;
     }
 }
