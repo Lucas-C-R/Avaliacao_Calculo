@@ -58,7 +58,8 @@ public class Grafico {
         this.desenho.text(30, -1.06, "30");
     }
 
-    public void desenhaGrafico(double x, double y){
+    public void desenhaGrafico(double x, double y, String nome){
         this.desenho.filledRectangle(x, y, 0.25, 0.016);
+        this.desenho.text(15, -0.3, nome);
     }
 }

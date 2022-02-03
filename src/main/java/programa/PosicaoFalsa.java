@@ -1,13 +1,10 @@
 package programa;
 
-
-import java.util.LinkedList;
-
-public class Bisseccao {
+public class PosicaoFalsa {
     Dados d = new Dados();
 
     /**
-     * Encontra a raiz da funcao, usando o metodo da Bisseccao.
+     * Encontra a raiz da funcao, usando o metodo da Posicao Falsa.
      * @param inic Inicio do intervalo.
      * @param fim Fim do intervalo.
      * @return A raiz da funcao.
@@ -16,25 +13,32 @@ public class Bisseccao {
         double a = inic;
         double b = fim;
         double fa = d.funcao(a);
-        double x = (a + b)/2;
+        double fb = d.funcao(b);
+        double x = 0;
         Grafico grafico = new Grafico();
 
-        // Enquanto b-a for maior que a precisa exigida, essa parte continuara sendo executada
-        for(int k = 1; b - a >= d.getPRECIS(); k++){
-            x = (a + b)/2;
+        if(Math.abs(fa) > d.getPRECIS() && Math.abs(fb) > d.getPRECIS()){
+            for(int k = 1; b - a >= d.getPRECIS(); k++){
+                x = ((a * fb) - (b * fa))/(fb - fa);
 
-            double fx = d.funcao(x);
+                double fx = d.funcao(x);
 
-            // Se f(x)*f(a) for maior que 0, entao 'a' ira assumir o valor de 'x', caso contrario, sera 'b'
-            if(fx * fa > 0){
-                a = x;
-            } else{
-                b = x;
+                if(Math.abs(fx) < d.getPRECIS()){
+                    break;
+                }
+
+                if(fa * fx > 0){
+                    a = x;
+                } else {
+                    b = x;
+                }
+
+                if(k < 30){
+                    grafico.desenhaGrafico(k, x, "Metodo da Posicao Falsa");
+                }
             }
-
-            if(k < 30){
-                grafico.desenhaGrafico(k, x, "Metodo da Bisseccao");
-            }
+        } else{
+            x = a;
         }
 
         return x;
