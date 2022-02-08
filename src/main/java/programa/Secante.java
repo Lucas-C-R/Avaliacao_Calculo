@@ -30,7 +30,7 @@ public class Secante {
                 // Se |f(x2)| ou |x2 - x1| for menor que 10^-10, a raiz sera igual a 'x2'
                 if(Math.abs(d.funcao(x2)) < d.getPRECIS() || Math.abs(x2 - x1) < d.getPRECIS()){
                     if(k < 30){
-                        grafico.desenhaGrafico(1, x2, "Metodo da Secante");
+                        grafico.desenhaGrafico(k, x2, "Metodo da Secante");
 
                         return x2;
                     }
@@ -39,7 +39,7 @@ public class Secante {
                     x1 = x2;
 
                     if(k < 30){
-                        grafico.desenhaGrafico(1, x1, "Metodo da Secante");
+                        grafico.desenhaGrafico(k, x1, "Metodo da Secante");
                     }
                 }
             }

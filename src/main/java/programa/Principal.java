@@ -14,7 +14,7 @@ public class Principal {
         Scanner entrada = new Scanner(System.in);
         String op = entrada.next();
 
-        double[] raizes = new double[2];
+        double[] raizes;
         Dados d = new Dados();
 
         switch(op){
