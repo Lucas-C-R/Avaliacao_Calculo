@@ -22,10 +22,10 @@ public class Newton {
         } else{
 
             // Se |f(x1)| ou |x1 - x0| for menor que 10^-10, a raiz sera igual a 'x1'
-            for(int k = 1; Math.abs(d.funcao(x1)) >= d.getPRECIS() && Math.abs(x1 - x0) >= d.getPRECIS(); k++){
+            for(int k = 1;! (Math.abs(d.funcao(x1)) < d.getPRECIS() || Math.abs(x1 - x0) < d.getPRECIS()); k++){
                 x0 = x1;
 
-                if(k < 30){
+                if(k <= 30){
                     grafico.desenhaGrafico(k, x1, "Metodo de Newton");
                 }
 

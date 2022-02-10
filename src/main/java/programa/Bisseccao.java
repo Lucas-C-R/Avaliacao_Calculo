@@ -16,7 +16,7 @@ public class Bisseccao {
         Grafico grafico = new Grafico();
 
         // Enquanto b-a for maior que 10^-10, essa parte continuara sendo executada
-        for(int k = 1; b - a >= d.getPRECIS(); k++){
+        for(int k = 1;! (b - a < d.getPRECIS()); k++){
             x = (a + b)/2;
 
             // Se f(x)*f(a) for maior que 0, entao 'a' ira assumir o valor de 'x', caso contrario, sera 'b'
@@ -26,7 +26,7 @@ public class Bisseccao {
                 b = x;
             }
 
-            if(k < 30){
+            if(k <= 30){
                 grafico.desenhaGrafico(k, x, "Metodo da Bisseccao");
             }
         }

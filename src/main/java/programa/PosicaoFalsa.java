@@ -21,7 +21,7 @@ public class PosicaoFalsa {
         } else{
 
             // Se (b - a) for menor que 10^-10, entao a raiz sera igual a (a + b) / 2
-            for(int k = 1; b - a >= d.getPRECIS(); k++){
+            for(int k = 1;! (b - a < d.getPRECIS()); k++){
                 double x = ((a * d.funcao(b)) - (b * d.funcao(a)))/(d.funcao(b) - d.funcao(a));
 
                 // Se |f(x)| for menor que 10^-10, entao a raiz sera igual ao 'x' atual
@@ -40,7 +40,7 @@ public class PosicaoFalsa {
                     b = x;
                 }
 
-                if(k < 30){
+                if(k <= 30){
                     grafico.desenhaGrafico(k, (a + b) / 2, "Metodo da Posicao Falsa");
                 }
             }
